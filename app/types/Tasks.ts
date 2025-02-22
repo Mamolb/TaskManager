@@ -1,8 +1,10 @@
-// app/types/Task.ts
 export interface Task {
-    id: string;
-    title: string;
-    completed: boolean;
-    // TODO: Extend this to include due date and other fields
-  }
-
+  id: string;
+  title: string;
+  description?: string | null;  // ✅ Now allows both `string` and `null`
+  completed: boolean;
+  dueDate?: Date | null;  // ✅ Allow `null` for optional values
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

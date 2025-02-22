@@ -1,0 +1,111 @@
+/****************************
+  Container & Header
+*****************************/
+.taskContainer {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.8rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-top: 2rem; /* Adds spacing below Total Task boxes */
+    width: 100%;
+    max-width: 1060px; 
+}
+
+.taskContainer h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.2rem;
+}
+
+/****************************
+  Task List & Card
+*****************************/
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Adds spacing between tasks */
+}
+
+.taskCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.4rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.taskCard:hover {
+    background-color: #f3f4f6;
+    transform: translateY(-2px);
+}
+
+/****************************
+  Task Info (Title & Description)
+*****************************/
+.taskInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.taskInfo h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827; 
+}
+
+.taskInfo p {
+    font-size: 0.9rem;
+    color: #374151; 
+}
+
+/****************************
+  Task Status Labels (Better Colors)
+*****************************/
+.taskStatus {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    text-transform: capitalize;
+    min-width: 110px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Updated color palette for statuses */
+.taskStatus.completed {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #34d399;
+}
+
+.taskStatus.pending {
+    background-color: #fef3c7;
+    color: #b45309;
+    border: 1px solid #facc15;
+}
+
+.taskStatus.inProgress {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #3b82f6;
+}
+
+.taskDue{
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    text-transform: capitalize;
+    min-width: 110px;
+    text-align: center;
+    background-color: #f9fafb;
+    color: #374151;
+}

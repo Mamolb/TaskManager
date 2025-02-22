@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import styles from "./Task.module.css";
 import TaskSummery from '@/components/TaskSummery/TaskSummery';
 import AddTaskButton from '@/components/AddTaskButton/AddTaskButton'; 
+import TodaysTask from '@/components/TodaysTask/TodaysTask';
 
 export default async function TaskPage(){
     //Checks if the user is signed in 
@@ -27,10 +28,16 @@ export default async function TaskPage(){
 
     //Noe sånn her for å sjekke kommende tasks(må legge til dueDate i databasen)
 
-    const dueToday = tasks.filter((t) => {
+    const dueTodayLength = tasks.filter((t) => {
         // check if dueDate is today
-        return t.dueDate && isToday(t.dueDate); //Må enten lage eller finne isToday
+        return t.dueDate && isToday(t.dueDate);
       }).length;
+     
+    const dueTodayTask = tasks.filter((t) => {
+        // check if dueDate is today
+        return t.dueDate && isToday(t.dueDate);
+    });
+
     const upcoming = tasks.filter((t) => {
         // e.g. check if dueDate is in the next 7 days
         return t.dueDate && isWithinNext7Days(t.dueDate);
@@ -45,10 +52,12 @@ export default async function TaskPage(){
             <TaskSummery
                 totalTasks={totalTasks}
                 completedTasks={completedTasks}
-                dueToday={dueToday}
-                inProgress={totalTasks - completedTasks - dueToday - upcoming}
+                dueToday={dueTodayLength}
+                inProgress={totalTasks - completedTasks - dueTodayLength - upcoming}
                 upcoming={upcoming}
             />
+             {/* Render Today's Tasks only if there are any */}
+             <TodaysTask tasks={dueTodayTask} />
       </main> 
       );
 }
