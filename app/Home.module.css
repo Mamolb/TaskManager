@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* Full viewport height */
+  text-align: center;
+  margin-left: 20vw; /* Adjusts for sidebar width */
+  color: #000000;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 0.1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  color: #000000;
+}
+
+.button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
