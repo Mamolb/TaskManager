@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import styles from "./Task.module.css";
 import TaskSummery from '@/components/TaskSummery/TaskSummery';
 import AddTaskButton from '@/components/AddTaskButton/AddTaskButton'; 
-import TodaysTask from '@/components/TodaysTask/TodaysTask';
+import TaskListClient from '@/components/TaskListClient/TaskListClient';
 
 export default async function TaskPage(){
     //Checks if the user is signed in 
@@ -57,7 +57,7 @@ export default async function TaskPage(){
                 upcoming={upcoming}
             />
              {/* Render Today's Tasks only if there are any */}
-             <TodaysTask tasks={dueTodayTask} />
+             <TaskListClient initialTasks={dueTodayTask} />
       </main> 
       );
 }
