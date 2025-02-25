@@ -14,13 +14,23 @@ export async function POST(request: Request){
     );
   }
   //Parse the incoming data(for now just the title)
-  const {title} = await request.json();
+  const {title, description, dueTime} = await request.json();
+  //Check if we got any valid input
+  if (!title) {
+    return NextResponse.json(
+      { error: "Title is required." },
+      { status: 400 }
+    );
+  }
+
   try
   {
-    //Create a new task
+    //Create a new task in database
     const task = await prisma.task.create({
         data: {
             title,
+            description: description || null,//Optional description set to null if not provided
+            dueDate: dueTime ? new Date(dueTime) : null,//Optional dueTime/Date set to null if not provided
             completed: false,
             userId: session.user.id
         },
@@ -29,7 +39,10 @@ export async function POST(request: Request){
   }
   catch(error){
     console.error("Error creating task:", error);
-    return NextResponse.error();
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
 

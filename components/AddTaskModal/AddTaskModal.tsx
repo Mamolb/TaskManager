@@ -12,10 +12,12 @@ export interface AddTaskModalProps {
 
 export default function AddTaskModal({ isOpen, onClose, onAdd }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
+  const [description,setDescription] = useState("");
+  const [duetime,setDuetime] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted with title:", title);
+    console.log("Form submitted with:", {title,description,duetime});
 
     try{
         const res = await fetch('/api/tasks', {
@@ -23,7 +25,11 @@ export default function AddTaskModal({ isOpen, onClose, onAdd }: AddTaskModalPro
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({title}),
+            body: JSON.stringify({
+              title,
+              description: description.trim() || undefined, // Send undefined if empty
+              dueTime: duetime || undefined, // Send undefined if empty
+            }),
         });
         if(!res.ok){
             console.log("Error creating task:", await res.text());
@@ -41,24 +47,32 @@ export default function AddTaskModal({ isOpen, onClose, onAdd }: AddTaskModalPro
 
   return (
     <div className={styles.modalBackdrop} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <h2>Create New Task</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Title:
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          <div>
-            <button type="submit">Save</button>
-            <button type="button" onClick={onClose}>Cancel</button>
-          </div>
-        </form>
-      </div>
+    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+      <h2>Create New Task</h2>
+      <form onSubmit={handleSubmit}>
+        
+        <div className={styles.inputGroup}>
+          <label>Title:</label>
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        </div>
+  
+        <div className={styles.inputGroup}>
+          <label>Description:</label>
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+  
+        <div className={styles.inputGroup}>
+          <label>Due Time:</label>
+          <input type="datetime-local" value={duetime} onChange={(e) => setDuetime(e.target.value)} />
+        </div>
+  
+        <div className={styles.buttonContainer}>
+          <button type="submit">Save</button>
+          <button type="button" className={styles.cancelButton} onClick={onClose}>Cancel</button>
+        </div>
+  
+      </form>
     </div>
+  </div>
   );
 }
