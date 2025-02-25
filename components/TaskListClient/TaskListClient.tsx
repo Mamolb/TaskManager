@@ -10,6 +10,7 @@ type TaskListClientProps = {
 
 export default function TaskListClient({ initialTasks }: TaskListClientProps) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const handleTaskUpdate = async (id: string, completed: boolean) => {
     // Optimistically update UI
@@ -34,5 +35,15 @@ export default function TaskListClient({ initialTasks }: TaskListClientProps) {
       // Optionally revert UI changes on error
     }
   };
-  return <TodaysTask tasks={tasks} onTaskUpdate={handleTaskUpdate} />;
+  // Filter tasks: if showCompleted is false, only show active tasks.
+  const filteredTasks = tasks.filter(task => showCompleted || !task.completed);
+
+   return (
+      <TodaysTask
+        tasks={filteredTasks}
+        onTaskUpdate={handleTaskUpdate}
+        showCompleted={showCompleted}
+        toggleShowCompleted={() => setShowCompleted((prev) => !prev)}
+      />
+  );
 }

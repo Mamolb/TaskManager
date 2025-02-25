@@ -1,0 +1,38 @@
+.dashboardContainer {
+    min-height: 100vh;
+    background-color: #eaf5f0;
+    padding: 2rem;
+    margin-left: 270px; /* Shift content so it's not behind the navbar */
+  }
+  
+  .topBar {
+    display: flex;
+    justify-content: space-between; /* "Welcome back" on the left, button on the right */
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .welcomeText {
+    font-size: 2rem;
+    margin: 0;
+    color: #333; /* Dark text for readability */
+  }
+  
+  .addTaskButton {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #16697a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .addTaskButton:hover {
+    opacity: 0.9;
+  }
+
+  
+  
