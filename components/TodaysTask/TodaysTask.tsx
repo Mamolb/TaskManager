@@ -31,4 +31,19 @@ const TodaysTask = ({ tasks, onTaskUpdate, showCompleted, toggleShowCompleted}: 
                         onChange={(e) => onTaskUpdate(task.id, e.target.checked)}
                     />
                     <div className={styles.taskInfo}>
-                        <h4>{t
+                        <h4>{task.title}</h4>
+                        <p>{task.description || "No description provided"}</p>
+                    </div>
+                    <p className={styles.taskDue}>
+                        Due: {task.dueDate ? new Date(task.dueDate).toDateString() : "No due date"}
+                    </p>
+                </div>
+            ))}
+        </div>
+        )}
+    </div>
+    );
+};
+
+
+export default TodaysTask;

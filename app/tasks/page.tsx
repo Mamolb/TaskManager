@@ -1,3 +1,4 @@
+
 import {getServerSession} from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -24,14 +25,19 @@ export default async function TaskPage(){
     //Filtrate the info
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter((t) => t.completed).length;
+
+    //Noe sånn her for å sjekke kommende tasks(må legge til dueDate i databasen)
+
     const dueTodayLength = tasks.filter((t) => {
         // check if dueDate is today
         return t.dueDate && isToday(t.dueDate);
       }).length;
+     
     const dueTodayTask = tasks.filter((t) => {
         // check if dueDate is today
         return t.dueDate && isToday(t.dueDate);
     });
+
     const upcoming = tasks.filter((t) => {
         // e.g. check if dueDate is in the next 7 days
         return t.dueDate && isWithinNext7Days(t.dueDate);
