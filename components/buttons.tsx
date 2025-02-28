@@ -3,6 +3,7 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import styles from './buttons.module.css';
 
 export function GetStartedButton(){
     return <button>Get started</button>
@@ -40,7 +41,7 @@ export function SignOutButton() {
   
     if (status === 'authenticated') {
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', width: '100%' }}>
             <Link href={`/user`} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', width: '100%' }}>
               <Image
                 src={session.user?.image ?? '/mememan.webp'}
@@ -53,7 +54,9 @@ export function SignOutButton() {
                 {session.user?.name ?? 'Unknown User'}
               </span>
             </Link>
-            <button onClick={() => signOut()} style={{ marginTop: '0.5rem', width: '100%', textAlign: 'left' }}>Sign out</button>
+            <button className = {styles.signoutbtn} onClick={() => signOut()}>
+              Sign out
+            </button>
           </div>
         );
     }

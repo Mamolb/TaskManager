@@ -1,0 +1,22 @@
+.signoutbtn {
+    background-color: #52576D; /* Slightly lighter than the navbar */
+    color: white;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .signoutbtn:hover {
+    background-color: #6C7288; /* A subtle lighter shade */
+    transform: scale(1.05); /* Slight hover effect */
+  }
+  
+  .signoutbtn:active {
+    transform: scale(0.98);
+  }
+  
