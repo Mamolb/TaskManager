@@ -32,7 +32,7 @@ export default function NavMenu() {
         <li>
           <Link href="/user">User</Link>
         </li>
-        <li>
+        <li className={styles.authSection}>
           <AuthCheck>
               <SignOutButton />
           </AuthCheck>

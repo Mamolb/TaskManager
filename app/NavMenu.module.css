@@ -42,3 +42,28 @@
 .links a:hover {
   background-color: #ffffff44;
 }
+
+.signout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.signout:hover {
+  background-color: #ffffff44;
+}
+
+
+/* Auth Container (For Profile + Sign Out Button) */
+/* Profile & Sign-Out Section */
+.authSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align everything to the left */
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ffffff44;
+}
