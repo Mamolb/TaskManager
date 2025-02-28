@@ -40,22 +40,22 @@ export function SignOutButton() {
   
     if (status === 'authenticated') {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
-              <Link href={`/user`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none' }}>
-                <Image
-                  src={session.user?.image ?? '/mememan.webp'}
-                  width={40}
-                  height={40}
-                  alt="Your Name"
-                  style={{ borderRadius: '50%' }}
-                />
-                <span style={{ color: 'white', fontSize: '1rem', marginTop: '0.25rem' }}>
-                  {session.user?.name ?? 'Unknown User'}
-                </span>
-              </Link>
-              <button onClick={() => signOut()} style={{ marginTop: '0.5rem' }}>Sign out</button>
-            </div>
-          );
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem', width: '100%' }}>
+            <Link href={`/user`} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', width: '100%' }}>
+              <Image
+                src={session.user?.image ?? '/mememan.webp'}
+                width={40}
+                height={40}
+                alt="Your Name"
+                style={{ borderRadius: '50%' }}
+              />
+              <span style={{ color: 'white', fontSize: '1rem' }}>
+                {session.user?.name ?? 'Unknown User'}
+              </span>
+            </Link>
+            <button onClick={() => signOut()} style={{ marginTop: '0.5rem', width: '100%', textAlign: 'left' }}>Sign out</button>
+          </div>
+        );
     }
     
     return <button onClick={() => signOut()}>Sign out</button>;
