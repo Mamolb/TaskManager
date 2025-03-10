@@ -129,3 +129,30 @@
     opacity: 0.9;
     transform: scale(1.05); /* Slight hover effect */
 }
+
+/* Base style for the status label */
+.statusLabel {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+  }
+  
+  /* Color styles based on task status */
+  .NOT_STARTED {
+    background-color: #f44336; /* Red */
+    color: #fff;
+  }
+  
+  .IN_PROGRESS {
+    background-color: #ff9800; /* Orange */
+    color: #fff;
+  }
+  
+  .DONE {
+    background-color: #4caf50; /* Green */
+    color: #fff;
+  }
+  

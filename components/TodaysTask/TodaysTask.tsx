@@ -43,12 +43,16 @@ const TodaysTask = ({ tasks, onTaskUpdate, showCompleted, toggleShowCompleted}: 
                      <select
                     className={styles.taskStatus}
                     value={task.status}
-                    onChange={(e) => onTaskUpdate(task.id, e.target.value as "NOT_STARTED" | "IN_PROGRESS" | "DONE")} // ✅ Fix: Explicitly cast `e.target.value`
+                    onChange={(e) => onTaskUpdate(task.id, e.target.value as "NOT_STARTED" | "IN_PROGRESS" | "DONE")} 
                     >
                     <option value="NOT_STARTED">Not Started</option>
                     <option value="IN_PROGRESS">In Progress</option>
                     <option value="DONE">Done</option>
                     </select>
+                     {/* New Status Label */}
+                    <span className={`${styles.statusLabel} ${styles[task.status]}`}>
+                        {task.status.replace('_', ' ')}
+                    </span>
                 </div>
             ))}
         </div>
