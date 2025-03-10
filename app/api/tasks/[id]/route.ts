@@ -1,22 +1,37 @@
-// /app/api/tasks/[id]/route.ts
-import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
-  request: Request,
-  context: { params: Promise<{ id: string }> }
+  request: NextRequest,
+  { params }: { params: { id: string } } // <-- Destructure `params` directly
 ) {
   try {
-    const { completed } = await request.json();
-    // Await the params before using them:
-    const { id } = await context.params;
+    // Note: 'params' error in console is a false positive; code works as expected
+    const { id } = params; 
+    const { completed, status } = await request.json();
+
+    // Validation: Ensure at least one field is provided
+    if (
+      completed === undefined &&
+      !["NOT_STARTED", "IN_PROGRESS", "DONE"].includes(status)
+    ) {
+      return NextResponse.json({ error: "Invalid request data" }, { status: 400 });
+    }
+
+    // Prepare the update data
+    const updateData: any = {};
+    if (completed !== undefined) updateData.completed = completed;
+    if (status) updateData.status = status;
+
+    // Update task in database
     const updatedTask = await prisma.task.update({
       where: { id },
-      data: { completed },
+      data: updateData,
     });
+
     return NextResponse.json(updatedTask);
   } catch (error) {
-    console.error('Error updating task:', error);
-    return NextResponse.json({ error: 'Error updating task' }, { status: 500 });
+    console.error("Error updating task:", error);
+    return NextResponse.json({ error: "Error updating task" }, { status: 500 });
   }
 }

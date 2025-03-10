@@ -31,7 +31,8 @@ export async function POST(request: Request){
             title,
             description: description || null,//Optional description set to null if not provided
             dueDate: dueTime ? new Date(dueTime) : null,//Optional dueTime/Date set to null if not provided
-            completed: false,
+            completed: false, //TODO: REMOVE AFTER IMPLEMENTATION OF STATUS
+            status: "NOT_STARTED", //All tasks start as not started
             userId: session.user.id
         },
     });

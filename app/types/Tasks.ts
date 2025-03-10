@@ -1,9 +1,10 @@
 export interface Task {
   id: string;
   title: string;
-  description?: string | null;  //Now allows both `string` and `null`
-  completed: boolean;
-  dueDate?: Date | null;  //Allow `null` for optional values
+  description?: string | null;  
+  completed: boolean; //TODO: REMOVE AFTER IMPLEMNTATION OF STATUS
+  status: "NOT_STARTED" | "IN_PROGRESS" | "DONE";
+  dueDate?: Date | null;  
   userId: string;
   createdAt: Date;
   updatedAt: Date;

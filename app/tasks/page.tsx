@@ -18,9 +18,20 @@ export default async function TaskPage(){
     //Fetch all tasks from the database that matches the userId
     const tasks = await prisma.task.findMany({
         where: {
-            userId: session.user.id
+          userId: session.user.id
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          dueDate: true,
+          completed: true,
+          status: true,
+          userId: true, 
+          createdAt: true, 
+          updatedAt: true, 
         }
-    });
+      });
 
     //Filtrate the info
     const totalTasks = tasks.length;

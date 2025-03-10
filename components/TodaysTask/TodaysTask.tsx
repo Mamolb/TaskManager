@@ -3,10 +3,10 @@ import { Task } from "@/app/types/Tasks";
 
 type TodaysTaskProps = {
     tasks: Task[];
-    onTaskUpdate: (id: string, completed: boolean) => void;
+    onTaskUpdate: (id: string, status: "NOT_STARTED" | "IN_PROGRESS" | "DONE") => void; 
     showCompleted: boolean;
     toggleShowCompleted: () => void;
-};
+  };
 
 const TodaysTask = ({ tasks, onTaskUpdate, showCompleted, toggleShowCompleted}: TodaysTaskProps) => {
     return (
@@ -25,10 +25,12 @@ const TodaysTask = ({ tasks, onTaskUpdate, showCompleted, toggleShowCompleted}: 
         <div className={styles.taskList}>
             {tasks.map((task) => (
                 <div key={task.id} className={styles.taskCard}>
-                    <input
-                        type="checkbox"
-                        checked={task.completed}
-                        onChange={(e) => onTaskUpdate(task.id, e.target.checked)}
+                   <input
+                    type="checkbox"
+                    checked={task.status === "DONE"}
+                    onChange={(e) =>
+                        onTaskUpdate(task.id, e.target.checked ? "DONE" : "IN_PROGRESS") 
+                    }
                     />
                     <div className={styles.taskInfo}>
                         <h4>{task.title}</h4>
@@ -37,6 +39,16 @@ const TodaysTask = ({ tasks, onTaskUpdate, showCompleted, toggleShowCompleted}: 
                     <p className={styles.taskDue}>
                         Due: {task.dueDate ? new Date(task.dueDate).toDateString() : "No due date"}
                     </p>
+                     {/* New Dropdown for Task Status */}
+                     <select
+                    className={styles.taskStatus}
+                    value={task.status}
+                    onChange={(e) => onTaskUpdate(task.id, e.target.value as "NOT_STARTED" | "IN_PROGRESS" | "DONE")} // ✅ Fix: Explicitly cast `e.target.value`
+                    >
+                    <option value="NOT_STARTED">Not Started</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="DONE">Done</option>
+                    </select>
                 </div>
             ))}
         </div>
