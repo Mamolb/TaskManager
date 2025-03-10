@@ -11,7 +11,8 @@ type TaskListClientProps = {
 export default function TaskListClient({ initialTasks }: TaskListClientProps) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [showCompleted, setShowCompleted] = useState(false);
-  const handleTaskUpdate = async (id: string, status: "NOT_STARTED" | "IN_PROGRESS" | "DONE") => { // ✅ Expect status instead of boolean
+  
+  const handleTaskUpdate = async (id: string, status: "NOT_STARTED" | "IN_PROGRESS" | "DONE") => { 
     setTasks(prevTasks =>
       prevTasks.map(task =>
         task.id === id ? { ...task, status } : task
@@ -32,8 +33,8 @@ export default function TaskListClient({ initialTasks }: TaskListClientProps) {
       console.error("Error updating task:", error);
     }
   };  
-  // Filter tasks: if showCompleted is false, only show active tasks.
-  const filteredTasks = tasks.filter(task => showCompleted || !task.completed);
+  // Filter tasks: if showCompleted is false, only show tasks not marked as DONE.
+  const filteredTasks = tasks.filter(task => showCompleted || task.status !== "DONE");
 
    return (
       <TodaysTask
